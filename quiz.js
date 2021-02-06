@@ -31,7 +31,7 @@ var questions = [{
 var game = {
     correct: 0,
     incorrect: 0,
-    counter: 20,
+    counter: 30,
     countdown: function () {
         game.counter--;
         $('#counter').html(game.counter);
@@ -42,8 +42,9 @@ var game = {
         }
     },
     start: function () {
-        timer = setInterval(game.countdown, 1000);
-        $('#subWrapper').prepend('<h2>Time Remaining: <span id="counter">20</span> seconds </h2>');
+    	timer = setInterval(game.countdown, (1000 * 60)) / (1000 * 60);
+  	
+        $('#subWrapper').prepend('<h2>Time Remaining: <span id="counter">30</span> minutes </h2>');
         $('#start').remove();
         for (var i = 0; i < questions.length; i++) {
             $('#subWrapper').append('<h2>' + questions[i].question + '</h2>')
@@ -107,7 +108,7 @@ var game = {
     result: function () {
         clearInterval(timer);
         $('#subWrapper h2').remove();
-        $('#subWrapper').append("<h3>GAME OVER!</h3>");
+        $('#subWrapper').append("<h3>QUIZ OVER!</h3>");
         $('#subWrapper').append("<h3>Correct Answers:" + this.correct + "</h3>");
         $('#subWrapper').append("<h3>Incorrect Answers:" + this.incorrect + "</h3>");
         $('#subWrapper').append("<h3>Unanswerd:" + (questions.length - (this.incorrect + this.correct)) + "</h3>");
